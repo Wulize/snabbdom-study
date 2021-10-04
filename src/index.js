@@ -1,29 +1,22 @@
-import {
-    init,
-    classModule,
-    propsModule,
-    styleModule,
-    eventListenersModule,
-    h,
-} from "snabbdom";
+import h from './snabbdom/h';
 
-// 创建patch函数
-const patch = init([
-    // Init patch function with chosen modules
-    classModule, // makes it easy to toggle classes
-    propsModule, // for setting properties on DOM elements
-    styleModule, // handles styling on elements with support for animations
-    eventListenersModule, // attaches event listeners
+let vnode1 = h('div', {}, [
+    h('p', {}, 'hh'),
+    h('p', {}, 'dd'),
+    h('p', {}, 'ff'),
+    h('p', {}, 'aa')
 ]);
 
-// 创建虚拟节点
-const myVnode = h('ul', {}, [
-    h('li', 'pingugo'),
-    h('li', 'xigua'),
-    h('li', 'xiangjiao'),
-    h('li', 'haha')
-]);
-const container = document.getElementById("container");
+let vnode2 = h('ul', {}, [
+    h('li', {}, 'apple'),
+    h('li', {}, 'banana'),
+    h('li', {}, [
+        h('div', {}, [
+            h('p', {}, 'aa'),
+            h('p', {}, 'aa')
+        ])
+    ]),
+    h('li', {}, h('li', {}, 'banana'))
+])
 
-// 让虚拟节点渲染上树
-patch(container, myVnode);
+console.log(vnode2);
